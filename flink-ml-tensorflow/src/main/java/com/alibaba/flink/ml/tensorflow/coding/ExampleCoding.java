@@ -27,7 +27,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import org.tensorflow.example.Example;
 import org.tensorflow.example.Feature;
 import org.tensorflow.example.Features;
-import org.tensorflow.op.core.TFRecordDataset;
+//import org.tensorflow.op.core.TFRecordDataset;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,11 +50,14 @@ public class ExampleCoding implements Coding<Object> {
 		this.mlContext = mlContext;
 		this.inputConfig = new ExampleCodingConfig();
 		JSONObject jsonObject = JSONObject.parseObject(mlContext.getProperties().get(INPUT_TF_EXAMPLE_CONFIG));
-		this.inputConfig.fromJsonObject(jsonObject);
-
+		if (jsonObject != null) {
+			this.inputConfig.fromJsonObject(jsonObject);
+		}
 		this.outputConfig = new ExampleCodingConfig();
 		JSONObject jsonObjectOutput = JSONObject.parseObject(mlContext.getProperties().get(OUTPUT_TF_EXAMPLE_CONFIG));
-		this.outputConfig.fromJsonObject(jsonObjectOutput);
+		if (jsonObjectOutput != null) {
+			this.outputConfig.fromJsonObject(jsonObjectOutput);
+		}
 	}
 
 	/**
